@@ -11,7 +11,7 @@ function Form() {
 function Typ() {
   return (
     <div>
-      <label htmlFor="konsument" className="flex mt-1 w-1/2 sm:ml-6 sm:justify-center md:ml-0 md:justify-start text-xs leading-7 text-gray-400">
+      <label htmlFor="konsument" className="flex mt-1 w-1/2 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start text-xs leading-7 text-gray-400">
         Privatperson eller Företag
       </label>
       <select
