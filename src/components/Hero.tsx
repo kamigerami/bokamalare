@@ -4,29 +4,28 @@ import Steps from './Steps';
 export default function Hero() {
   return (
 
-    <main className="mx-auto mt-16 max-w-7xl px-4 sm:mt-24 sm:px-6 lg:mt-32">
-
-          <svg
-            className="absolute left-full -translate-y-3/4 -translate-x-1/4 transform md:-translate-y-1/2 lg:-translate-x-1/2"
-            width={404}
-            height={784}
-            fill="none"
-            viewBox="0 0 404 784"
-          >
-            <defs>
-              <pattern
-                id="5d0dd344-b041-4d26-bec4-8d33ea57ec9b"
-                x={0}
-                y={0}
-                width={20}
-                height={20}
-                patternUnits="userSpaceOnUse"
-              >
-                <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
-              </pattern>
-            </defs>
-            <rect width={404} height={784} fill="url(#5d0dd344-b041-4d26-bec4-8d33ea57ec9b)" />
-          </svg>
+    <main className="mx-auto max-w-7xl px-4 mt-4 sm:mt-8 sm:px-6 lg:mt-12">
+        <svg
+          className="absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-red-400 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
+          width={364}
+          height={384}
+          viewBox="0 0 364 384"
+          fill="none"
+        >
+          <defs>
+            <pattern
+              id="eab71dd9-9d7a-47bd-8044-256344ee00d0"
+              x={0}
+              y={0}
+              width={20}
+              height={20}
+              patternUnits="userSpaceOnUse"
+            >
+              <rect x={0} y={0} width={4} height={4} fill="currentColor" />
+            </pattern>
+          </defs>
+          <rect width={364} height={384} fill="url(#eab71dd9-9d7a-47bd-8044-256344ee00d0)" />
+        </svg>
     <div className="lg:grid lg:grid-cols-12 lg:gap-8">
       <div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:text-left">
         <h1>

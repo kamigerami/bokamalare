@@ -18,8 +18,8 @@ function Steps() {
         {steps.map((step) => (
           <li key={step.name} className="flex-1">
             {step.status === "complete" ? (
-              <button className="group flex flex-col  border-indigo-600 py-2 hover:border-indigo-800 border-l-0 border-t-4 pl-0 pt-4 pb-0">
-                <span className="text-sm font-medium text-indigo-600 group-hover:text-indigo-800">
+              <button className="group flex flex-col  border-blue-600 py-2 hover:border-blue-800 border-l-0 border-t-4 pl-0 pt-4 pb-0">
+                <span className="text-sm font-medium text-blue-600 group-hover:text-blue-800">
                   {step.id}
                 </span>
                 <span className="text-sm font-medium">{step.name}</span>
@@ -27,10 +27,10 @@ function Steps() {
             ) : step.status === "current" ? (
               <>
                 <button
-                  className="flex flex-col border-indigo-600 py-2 border-l-0 border-t-4 pl-0 pt-4 pb-0"
+                  className="flex flex-col border-blue-600 py-2 border-l-0 border-t-4 pl-0 pt-4 pb-0"
                   aria-current="step"
                 >
-                  <span className="text-sm font-medium text-indigo-600">
+                  <span className="text-sm font-medium text-blue-600">
                     {step.id}
                   </span>
                   <span className="text-sm font-medium">{step.name}</span>
