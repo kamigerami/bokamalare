@@ -1,7 +1,4 @@
-import React from "react";
-type Props = {};
-
-function Form({}: Props) {
+function Form() {
   return (
     <>
       <form>
@@ -11,7 +8,7 @@ function Form({}: Props) {
   );
 }
 
-function Typ({}: Props) {
+function Typ() {
   return (
     <div>
       <label htmlFor="konsument" className="flex mt-1 w-1/2 sm:ml-6 sm:justify-center md:ml-0 md:justify-start text-xs leading-7 text-gray-400">

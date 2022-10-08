@@ -1,9 +1,4 @@
-import React, { useState } from "react";
-
-type Props = {};
-
-function Steps({}: Props) {
-  const [step, setStep] = useState(1);
+function Steps() {
 
   const steps = [
     { id: "Steg 1", name: "Välj typ", href: "typ", status: "current" },
