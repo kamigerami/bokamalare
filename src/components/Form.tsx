@@ -29,7 +29,7 @@ function Typ() {
   );
 }
 
-function Antal({}: Props) {
+function Antal() {
   return (
     <>
       <label htmlFor="antal" className="text-sm leading-7 text-gray-400">
