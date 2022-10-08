@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Stats from "../components/Stats";
+import Galleri from "../components/Galleri";
 
 const Home: NextPage = (props) => {
   return (
@@ -16,6 +17,7 @@ const Home: NextPage = (props) => {
       <Header />
       <Hero />
       <Stats />
+      <Galleri />
       <Footer/>
     </>
   );

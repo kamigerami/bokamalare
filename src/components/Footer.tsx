@@ -44,7 +44,7 @@ const navigation = {
   
   export default function Footer() {
     return (
-      <footer className="bg-white" aria-labelledby="footer-heading">
+      <footer className="mt-12 bg-gray-50" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>

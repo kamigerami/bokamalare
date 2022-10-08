@@ -6,10 +6,10 @@ export default function Hero() {
 
     <main className="mx-auto max-w-7xl px-4 mt-4 sm:mt-8 sm:px-6 lg:mt-12">
         <svg
-          className="hidden xl:block absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-red-400 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
-          width={364}
+          className="hidden xl:block absolute bottom-0 right-0 mb-48 translate-x-1/2 transform text-blue-400 lg:top-0 lg:mt-28 lg:mb-0 xl:translate-x-0 xl:transform-none"
+          width={546}
           height={384}
-          viewBox="0 0 364 384"
+          viewBox="0 0 546 384"
           fill="none"
         >
           <defs>

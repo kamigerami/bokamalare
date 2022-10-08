@@ -11,12 +11,12 @@ function Form() {
 function Typ() {
   return (
     <div>
-      <label htmlFor="konsument" className="flex mt-1 w-1/2 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start text-xs leading-7 text-gray-400">
-        Privatperson eller Företag
+      <label htmlFor="kundgrupp" className="flex mt-1 w-1/2 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start text-xs leading-7 text-gray-400">
+        Kundgrupp
       </label>
       <select
-        id="konsument"
-        name="konsument"
+        id="kundgrupp"
+        name="kundgrupp"
         className="mt-1 w-1/2 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
       >
         <option>Privatperson</option>

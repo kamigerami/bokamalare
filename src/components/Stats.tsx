@@ -1,6 +1,6 @@
 export default function Stats() {
     return (
-      <div className="mt-12 md:mt-24 lg:mt-32 xl:mt-48 bg-blue-50 pt-12 sm:pt-16">
+      <div className="mt-12 md:mt-24 lg:mt-32 xl:mt-56 bg-blue-50 pt-12 sm:pt-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
