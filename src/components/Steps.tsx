@@ -1,17 +1,15 @@
-function Steps() {
+
+function Steps(props: { formStep: any }) {
+
+  const formStep = props.formStep;
 
   const steps = [
-    { id: "Steg 1", name: "Välj typ", href: "typ", status: "current" },
-    { id: "Steg 2", name: "Antal rum", href: "antal", status: "upcoming" },
-    { id: "Steg 3", name: "Offert", href: "offert", status: "upcoming" },
-    { id: "Steg 4", name: "Boka", href: "boka", status: "upcoming" },
+    { step: 1,id: "Steg 1", name: "Kundgrupp", status: formStep > 1 ? "complete" : formStep === 1 ? "current" : "upcoming" },
+    {step: 2, id: "Steg 2", name: "Mått", status: formStep > 2 ? "complete" : formStep === 2 ? "current" : "upcoming"},
+    { step: 3,id: "Steg 3", name: "Offert", status: formStep > 3 ? "complete" : formStep === 3 ? "current" : "upcoming" },
+    { step: 4,id: "Steg 4", name: "Bokning",  status:  formStep > 4 ? "complete" : formStep === 4 ? "current" : "upcoming" },
   ];
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    console.log("click -> ", e.currentTarget.value);
-  };
-
+  
   return (
     <nav aria-label="Progress">
       <ol role="list" className="flex space-y-0 space-x-8">
@@ -38,7 +36,6 @@ function Steps() {
               </>
             ) : (
               <button
-                onClick={(e) => handleClick(e)}
                 className="group flex flex-col  border-gray-200 py-2 hover:border-gray-300 border-l-0 border-t-4 pl-0 pt-4 pb-0"
               >
                 <span className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
