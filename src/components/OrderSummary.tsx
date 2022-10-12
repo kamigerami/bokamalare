@@ -19,13 +19,14 @@ const products = [
 export default function Example() {
   return (
     <>
-      <main className="lg:flex lg:min-h-full lg:flex-row-reverse lg:overflow-hidden">
+      <main className="lg:flex lg:flex-row-reverse lg:overflow-hidden">
+
         <h1 className="sr-only">Checkout</h1>
 
         {/* Mobile order summary */}
         <section
           aria-labelledby="order-heading"
-          className="bg-gray-50 px-4 py-6 sm:px-6 lg:hidden"
+          className="bg-gray-50/50 px-4 py-6 sm:px-6 lg:hidden"
         >
           <Disclosure as="div" className="mx-auto max-w-lg">
             {({ open }) => (
@@ -129,7 +130,7 @@ export default function Example() {
         {/* Order summary */}
         <section
           aria-labelledby="summary-heading"
-          className="hidden w-full max-w-md flex-col bg-gray-50 lg:flex"
+          className="hidden flex-col bg-gray-50/50 lg:flex"
         >
           <ul
             role="list"

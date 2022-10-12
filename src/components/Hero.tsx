@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Form from "./Form";
-import OrderSummary from "./OrderSummary";
+import Steps from "./Steps";
 
 export default function Hero() {
-  const [formStep, setFormStep] = useState<number>(1);
+  const [formStep, setFormStep] = useState<number>(0);
 
-  const formButtons = () => {
+  const FormButtons = () => {
     return (
       <>
         <button
@@ -32,7 +32,7 @@ export default function Hero() {
           onClick={() => alert("Bokning klar")}
           className={` ${
             formStep < 4 && "hidden"
-          } "mt-1 sm:text-sm" ml-2 rounded-md border border-transparent bg-green-600 py-2 px-3 text-base font-medium text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2`}
+          } "mt-1 sm:text-sm ml-2 rounded-md border border-transparent bg-green-600 py-2 px-3 text-base font-medium text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2"`}
         >
           Boka nu
         </button>
@@ -42,11 +42,17 @@ export default function Hero() {
 
   return (
     <main className="mx-auto mt-4 max-w-7xl px-4 pb-4 sm:mt-8 sm:px-6 lg:mt-12 lg:h-screen">
+      {/* <div className="z-[-10] lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+        <img
+          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
+          src="https://images.unsplash.com/photo-1571219836033-d62fe95c873d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+          alt=""
+        />
+      </div> */}
       <svg
-        className="absolute bottom-0 right-0 hidden translate-x-1/2  transform text-blue-400 lg:top-0 lg:mt-28 xl:block xl:translate-x-0 xl:transform-none"
-        width={546}
-        height={384}
-        viewBox="0 0 546 384"
+        className="w-1/4 absolute bottom-0 right-10 hidden translate-x-1/2  transform  text-blue-400 lg:top-0 lg:mt-28 xl:block xl:translate-x-0 xl:transform-none"
+
+        viewBox="0 0 384 546"
         fill="none"
       >
         <defs>
@@ -87,33 +93,50 @@ export default function Hero() {
             timmar och du bokar önskad tid själv.
           </p>
           <div className="mt-8 sm:mx-auto sm:max-w-lg sm:text-center lg:mx-0 lg:text-left">
-            <Form formStep={formStep} formButtons={formButtons} />
+            <Steps formStep={formStep} />
+          {formStep === 0 && (
+            <>
+          <button
+          type="button"
+          onClick={() => setFormStep(formStep + 1)}
+          className={"mt-3 sm:text-sm rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"}
+          
+        >
+          Skapa  offert
+        </button>
+              <p className="mt-3 mb-4 text-sm text-gray-500">
+              Offerten är endast en indikation på kostnad.{` `}
+              <a href="#" className="font-medium text-gray-900 underline">
+                Våra Villkor
+              </a>
+              .
+            </p>
+            </>
+        )}
           </div>
         </div>
 
-        <div className="relative mt-12 sm:mx-auto sm:max-w-lg lg:col-span-6 lg:mx-0 lg:mt-0 lg:flex lg:max-w-none lg:items-center">
-          <div className="relative mx-auto mt-12 w-full rounded-lg shadow-lg lg:max-w-md">
-            {formStep != 3 && (
-              <>
-                <span className="sr-only">Se hur vi målar</span>
-                <video
-                  className="w-full ring-1 ring-blue-600"
-                  autoPlay
-                  muted
-                  playsInline
-                  loop
-                >
-                  <source
-                    src="https://joy.videvo.net/videvo_files/video/free/2021-05/large_watermarked/210518_05_Camera%20DIY_4k_012_preview.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-              </>
-            )}
-            {formStep === 3 && (
-              <OrderSummary />
-            )}
-          </div>
+        <div className="relative  mt-12 h-screen sm:mx-auto lg:col-span-6 lg:mt-0 lg:flex lg:w-full  lg:items-center">
+          {formStep === 0 && (
+            <>
+              <span className="sr-only">Se hur vi målar</span>
+              <video
+                autoPlay
+                muted
+                playsInline
+                loop
+                className="hidden lg:block absolute inset-0 top-0 w-full"
+              >
+                <source
+                  src="https://joy.videvo.net/videvo_files/video/free/2021-05/large_watermarked/210518_05_Camera%20DIY_4k_012_preview.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </>
+          )}
+            <div className="absolute inset-0 top-0 w-full">
+              <Form formStep={formStep} FormButtons={FormButtons} />
+            </div>
         </div>
       </div>
     </main>
