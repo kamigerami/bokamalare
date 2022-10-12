@@ -118,7 +118,7 @@ function Matt() {
           </label>
         </li>
 
-        {/* Yta */}
+        {/* Yta ett rum */}
         <label
           htmlFor="langd"
           className="mt-1 flex text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
@@ -160,6 +160,8 @@ function Matt() {
           onChange={(e) => setHojd(parseInt(e.target.value))}
         ></input>
 
+        {/* Yta ett rum end */}
+        
         <div className="mb-2 flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
           <dt className="space-y-6 text-sm font-medium">Pris</dt>
           <dd className="text-base">
