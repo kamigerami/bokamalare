@@ -13,7 +13,7 @@ export default function Hero() {
           onClick={() => setFormStep(formStep === 1 ? formStep : formStep - 1)}
           className={` ${formStep === 1 && "hidden"} ${
             formStep === 4 && "bg-gray-400 outline-none"
-          } "mt-1 sm:text-sm" ml-2 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+          } "mt-1 sm:text-sm ml-2 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"`}
         >
           Tillbaka
         </button>
@@ -22,7 +22,7 @@ export default function Hero() {
           onClick={() => setFormStep(formStep + 1)}
           className={` ${
             formStep >= 4 && "hidden"
-          } "mt-1 sm:text-sm" ml-2 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+          } "mt-1 sm:text-sm ml-2 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"`}
           disabled={formStep >= 4}
         >
           Nästa steg

@@ -220,6 +220,13 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
+"@types/react-calendar@^3.5.3":
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/@types/react-calendar/-/react-calendar-3.5.3.tgz#f9dcf62a14089d1d7352d35f29e43e04a9d248ae"
+  integrity sha512-CRbEPcK+KolZBKeaJ/pm5VzRSA4KVTsz/c61Vdl74y0tuZm7WHIJPaRvVM+3ggInc8TkJrrt8/YKVrkrwGkfrA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@18.0.5":
   version "18.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.5.tgz#330b2d472c22f796e5531446939eacef8378444a"
@@ -1812,6 +1819,11 @@ react-dom@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-hook-form@^7.37.0:
+  version "7.37.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.37.0.tgz#4d1738f092d3d8a3ade34ee892d97350b1032b19"
+  integrity sha512-6NFTxsnw+EXSpNNvLr5nFMjPdYKRryQcelTHg7zwBB6vAzfPIcZq4AExP4heVlwdzntepQgwiOQW4z7Mr99Lsg==
 
 react-is@^16.13.1:
   version "16.13.1"

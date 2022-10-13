@@ -1,22 +1,34 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import OrderSummary from "./OrderSummary";
+import { useForm, UseFormRegister } from "react-hook-form";
+
+type AppForm = {
+  kundgrupp: string;
+  rum: boolean;
+  bostad: boolean;
+  langd: number;
+  bredd: number;
+  hojd: number;
+};
 
 function Form(props: { formStep: number; FormButtons: () => JSX.Element }) {
   const formStep = props.formStep;
   const FormButtons = props.FormButtons;
+
+  const { register } = useForm<AppForm>();
 
   return (
     <>
       <form>
         <section
           aria-labelledby="summary-heading"
-          className="flex-col justify-between rounded-sm bg-gray-50 lg:flex"
+          className="flex-col justify-between rounded-sm bg-gray-50 shadow-md lg:flex"
         >
-          {formStep === 1 && <Kundgrupp />}
-          {formStep === 2 && <Matt />}
+          {formStep === 1 && <Kundgrupp reg={register} />}
+          {formStep === 2 && <Matt reg={register} />}
           {formStep === 3 && <OrderSummary />}
-          {formStep === 4 && <Bokning />}
+          {formStep === 4 && <Bokning reg={register} />}
           {formStep !== 0 && (
             <div className="mb-4 px-4">
               <FormButtons />
@@ -28,31 +40,30 @@ function Form(props: { formStep: number; FormButtons: () => JSX.Element }) {
   );
 }
 
-function Kundgrupp() {
+const Kundgrupp: React.FC<{ reg: UseFormRegister<AppForm> }> = ({ reg }) => {
   return (
     <>
-      <div className="mt-2 flex flex-col items-center ">
+      <div className="mt-4 flex flex-col items-center">
         <div className="flex flex-col  items-center justify-center text-sm font-medium">
           <h3 className="text-gray-900">Välj kundgrupp</h3>
-          <label
-            htmlFor="langd"
-            className="mt-1 items-start text-xs leading-7 text-gray-400"
-          >
+          <label className="mt-1 items-start text-xs leading-7 text-gray-400">
             Privatperson eller företagskund
           </label>
         </div>
         <p className="max-auto w-1/2 pt-4 text-sm text-gray-500">
           Beroende på om du väljer att ta in en offert som privatperson eller
-          företagskund skiljer sig offerten en del. Företag betalar inte någon
-          moms medan privatpersoner får använda sig av ROT och RUT vilket ger
-          dig 30% rabatt på offerten.
+          företagskund skiljer sig offerten en del.
+          <br></br>
+          <br></br>
+          Företag betalar inte någon moms medan privatpersoner får använda sig
+          av ROT och RUT vilket ger dig 30% rabatt på offerten.
         </p>
 
         <ul role="list" className="py-6">
           <select
             id="kundgrupp"
-            name="kundgrupp"
             className="mx-1 mt-1 w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            {...reg("kundgrupp")}
           >
             <option>Privatperson</option>
             <option>Företag</option>
@@ -65,9 +76,9 @@ function Kundgrupp() {
       </div>
     </>
   );
-}
+};
 
-function Matt() {
+const Matt: React.FC<{ reg: UseFormRegister<AppForm> }> = ({ reg }) => {
   // const [matt, setMatt] = useState<number>(0);
   const [langd, setLangd] = useState<number>(0);
   const [bredd, setBredd] = useState<number>(0);
@@ -80,7 +91,7 @@ function Matt() {
 
   return (
     <>
-      <div className="mt-2 flex flex-col items-center justify-between ">
+      <div className="mt-4 flex flex-col items-center justify-between ">
         <div className="space-y-1 text-sm font-medium">
           <h3 className="text-gray-500">Jag vill måla om i</h3>
         </div>
@@ -161,7 +172,7 @@ function Matt() {
         ></input>
 
         {/* Yta ett rum end */}
-        
+
         <div className="mb-2 flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
           <dt className="space-y-6 text-sm font-medium">Pris</dt>
           <dd className="text-base">
@@ -172,17 +183,17 @@ function Matt() {
       </ul>
     </>
   );
-}
+};
 
-function Bokning() {
+const Bokning: React.FC<{ reg: UseFormRegister<AppForm> }> = ({ reg }) => {
   const [value, onChange] = useState(new Date());
 
   return (
     <>
-      <div className="mt-2 mb-2 flex flex-col items-center justify-between ">
+      <div className="mt-4 mb-2 flex flex-col items-center justify-between ">
         <div className="space-y-1 text-sm font-medium">
           <h3 className="text-gray-900">
-            Välj datum du vill att vi ska komma och titta på jobbet
+            Välj datum du vill att vi ska börja måla
           </h3>
         </div>
       </div>
@@ -190,6 +201,6 @@ function Bokning() {
       <Calendar onChange={onChange} value={value} className="mx-auto mb-2" />
     </>
   );
-}
+};
 
 export default Form;

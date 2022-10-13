@@ -16,11 +16,10 @@ const products = [
   },
 ];
 
-export default function Example() {
+const OrderSummary = () => {
   return (
     <>
       <main className="lg:flex lg:flex-row-reverse lg:overflow-hidden">
-
         <h1 className="sr-only">Checkout</h1>
 
         {/* Mobile order summary */}
@@ -202,4 +201,6 @@ export default function Example() {
       </main>
     </>
   );
-}
+};
+
+export default OrderSummary;
