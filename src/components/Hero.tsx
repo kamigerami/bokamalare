@@ -13,7 +13,7 @@ export default function Hero() {
           onClick={() => setFormStep(formStep === 1 ? formStep : formStep - 1)}
           className={` ${formStep === 1 && "hidden"} ${
             formStep === 4 && "bg-gray-400 outline-none"
-          } "mt-1 sm:text-sm ml-2 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"`}
+          } "mt-1 focus:ring-offset-2" ml-2 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 sm:text-sm `}
         >
           Tillbaka
         </button>
@@ -22,17 +22,16 @@ export default function Hero() {
           onClick={() => setFormStep(formStep + 1)}
           className={` ${
             formStep >= 4 && "hidden"
-          } "mt-1 sm:text-sm ml-2 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"`}
+          } "mt-1 focus:ring-offset-2" ml-2 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 sm:text-sm`}
           disabled={formStep >= 4}
         >
           Nästa steg
         </button>
         <button
-          type="button"
-          onClick={() => alert("Bokning klar")}
+          type="submit"
           className={` ${
             formStep < 4 && "hidden"
-          } "mt-1 sm:text-sm ml-2 rounded-md border border-transparent bg-green-600 py-2 px-3 text-base font-medium text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2"`}
+          } "mt-1 focus:ring-offset-2" ml-2 rounded-md border border-transparent bg-green-600 py-2 px-3 text-base font-medium text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500 sm:text-sm`}
         >
           Boka nu
         </button>
@@ -50,8 +49,7 @@ export default function Hero() {
         />
       </div> */}
       <svg
-        className="w-1/4 absolute bottom-0 right-10 hidden translate-x-1/2  transform  text-blue-400 lg:top-0 lg:mt-28 xl:block xl:translate-x-0 xl:transform-none"
-
+        className="absolute bottom-0 right-10 hidden w-1/4 translate-x-1/2  transform  text-blue-400 lg:top-0 lg:mt-28 xl:block xl:translate-x-0 xl:transform-none"
         viewBox="0 0 384 546"
         fill="none"
       >
@@ -94,25 +92,26 @@ export default function Hero() {
           </p>
           <div className="mt-8 sm:mx-auto sm:max-w-lg sm:text-center lg:mx-0 lg:text-left">
             <Steps formStep={formStep} />
-          {formStep === 0 && (
-            <>
-          <button
-          type="button"
-          onClick={() => setFormStep(formStep + 1)}
-          className={"mt-3 sm:text-sm rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"}
-          
-        >
-          Skapa  offert
-        </button>
-              <p className="mt-3 mb-4 text-sm text-gray-500">
-              Offerten är endast en indikation på kostnad.{` `}
-              <a href="#" className="font-medium text-gray-900 underline">
-                Våra Villkor
-              </a>
-              .
-            </p>
-            </>
-        )}
+            {formStep === 0 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setFormStep(formStep + 1)}
+                  className={
+                    "mt-3 rounded-md border border-transparent bg-blue-600 py-2 px-3 text-base font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:text-sm"
+                  }
+                >
+                  Skapa offert
+                </button>
+                <p className="mt-3 mb-4 text-sm text-gray-500">
+                  Offerten är endast en indikation på kostnad.{` `}
+                  <a href="#" className="font-medium text-gray-900 underline">
+                    Våra Villkor
+                  </a>
+                  .
+                </p>
+              </>
+            )}
           </div>
         </div>
 
@@ -125,7 +124,7 @@ export default function Hero() {
                 muted
                 playsInline
                 loop
-                className="hidden lg:block absolute inset-0 top-0 w-full"
+                className="absolute inset-0 top-0 hidden w-full lg:block"
               >
                 <source
                   src="https://joy.videvo.net/videvo_files/video/free/2021-05/large_watermarked/210518_05_Camera%20DIY_4k_012_preview.mp4"
@@ -134,9 +133,9 @@ export default function Hero() {
               </video>
             </>
           )}
-            <div className="absolute inset-0 top-0 w-full">
-              <Form formStep={formStep} FormButtons={FormButtons} />
-            </div>
+          <div className="absolute inset-0 top-0 w-full">
+            <Form formStep={formStep} FormButtons={FormButtons} />
+          </div>
         </div>
       </div>
     </main>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import OrderSummary from "./OrderSummary";
-import { useForm, UseFormRegister } from "react-hook-form";
+import { useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
 
 type AppForm = {
   kundgrupp: string;
@@ -16,17 +16,28 @@ function Form(props: { formStep: number; FormButtons: () => JSX.Element }) {
   const formStep = props.formStep;
   const FormButtons = props.FormButtons;
 
-  const { register } = useForm<AppForm>();
+  const { register, handleSubmit, watch } = useForm<AppForm>();
+  const watchRum = watch("rum", false);
+  const watchBostad = watch("bostad", false);
+  const onSubmit: SubmitHandler<AppForm> = (data) => {
+    alert(JSON.stringify(data));
+  };
 
   return (
     <>
-      <form>
-        <section
-          aria-labelledby="summary-heading"
-          className="flex-col justify-between rounded-sm bg-gray-50 shadow-md lg:flex"
-        >
+      <section
+        aria-labelledby="summary-heading"
+        className="flex-col justify-between rounded-sm bg-gray-50 shadow-md lg:flex"
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
           {formStep === 1 && <Kundgrupp reg={register} />}
-          {formStep === 2 && <Matt reg={register} />}
+          {formStep === 2 && (
+            <Matt
+              watchRum={watchRum}
+              watchBostad={watchBostad}
+              reg={register}
+            />
+          )}
           {formStep === 3 && <OrderSummary />}
           {formStep === 4 && <Bokning reg={register} />}
           {formStep !== 0 && (
@@ -34,8 +45,8 @@ function Form(props: { formStep: number; FormButtons: () => JSX.Element }) {
               <FormButtons />
             </div>
           )}
-        </section>
-      </form>
+        </form>
+      </section>
     </>
   );
 }
@@ -78,7 +89,11 @@ const Kundgrupp: React.FC<{ reg: UseFormRegister<AppForm> }> = ({ reg }) => {
   );
 };
 
-const Matt: React.FC<{ reg: UseFormRegister<AppForm> }> = ({ reg }) => {
+const Matt: React.FC<{
+  reg: UseFormRegister<AppForm>;
+  watchRum: boolean;
+  watchBostad: boolean;
+}> = ({ reg, watchRum, watchBostad }) => {
   // const [matt, setMatt] = useState<number>(0);
   const [langd, setLangd] = useState<number>(0);
   const [bredd, setBredd] = useState<number>(0);
@@ -99,13 +114,7 @@ const Matt: React.FC<{ reg: UseFormRegister<AppForm> }> = ({ reg }) => {
       <ul role="list" className="flex-auto  overflow-y-auto px-6">
         {/* Rum eller bostad */}
         <li>
-          <input
-            className="mr-2"
-            type="checkbox"
-            id="rum"
-            name="rum"
-            value="rum"
-          />
+          <input className="mr-2" type="checkbox" id="rum" {...reg("rum")} />
           <label
             htmlFor="rum"
             className="mt-1 space-x-1 text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
@@ -118,8 +127,7 @@ const Matt: React.FC<{ reg: UseFormRegister<AppForm> }> = ({ reg }) => {
             className="mr-2"
             type="checkbox"
             id="bostad"
-            name="bostad"
-            value="bostad"
+            {...reg("bostad")}
           />
           <label
             htmlFor="bostad"
@@ -128,51 +136,90 @@ const Matt: React.FC<{ reg: UseFormRegister<AppForm> }> = ({ reg }) => {
             hela bostaden
           </label>
         </li>
+        {watchRum && (
+          <>
+            <label
+              htmlFor="langd"
+              className="mt-1 flex text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
+            >
+              Längd i meter
+            </label>
+            <input
+              id="langd"
+              type="text"
+              name="langd"
+              className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+              onChange={(e) => setLangd(parseInt(e.target.value))}
+            ></input>
+            <label
+              htmlFor="bredd"
+              className="mt-1 flex w-1/2 text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
+            >
+              Bredd i meter
+            </label>
+            <input
+              id="bredd"
+              type="text"
+              name="bredd"
+              className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+              onChange={(e) => setBredd(parseInt(e.target.value))}
+            ></input>
+            <label
+              htmlFor="hojd"
+              className="mt-1 flex text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
+            >
+              Höjd i meter
+            </label>
+            <input
+              id="hojd"
+              type="text"
+              name="hojd"
+              className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+              onChange={(e) => setHojd(parseInt(e.target.value))}
+            ></input>
+          </>
+        )}
 
-        {/* Yta ett rum */}
-        <label
-          htmlFor="langd"
-          className="mt-1 flex text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
-        >
-          Längd i meter
-        </label>
-        <input
-          id="langd"
-          type="text"
-          name="langd"
-          className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-          onChange={(e) => setLangd(parseInt(e.target.value))}
-        ></input>
-
-        <label
-          htmlFor="bredd"
-          className="mt-1 flex w-1/2 text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
-        >
-          Bredd i meter
-        </label>
-        <input
-          id="bredd"
-          type="text"
-          name="bredd"
-          className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-          onChange={(e) => setBredd(parseInt(e.target.value))}
-        ></input>
-        <label
-          htmlFor="hojd"
-          className="mt-1 flex text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
-        >
-          Höjd i meter
-        </label>
-        <input
-          id="hojd"
-          type="text"
-          name="hojd"
-          className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-          onChange={(e) => setHojd(parseInt(e.target.value))}
-        ></input>
-
-        {/* Yta ett rum end */}
-
+        {watchBostad && (
+          <>
+            <label
+              htmlFor="kvm"
+              className="mt-1 flex text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
+            >
+              kvadratmeter
+            </label>
+            <input
+              id="kvm"
+              type="text"
+              name="kvm"
+              className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            ></input>
+            <label
+              htmlFor="fonster"
+              className="mt-1 flex w-1/2 text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
+            >
+              Antal fönster
+            </label>
+            <input
+              id="fonster"
+              type="text"
+              name="fonster"
+              className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            ></input>
+            <label
+              htmlFor="dorrar"
+              className="mt-1 flex text-xs leading-7 text-gray-400 sm:ml-6 sm:justify-center lg:ml-0 lg:justify-start"
+            >
+              Antal dörrar
+            </label>
+            <input
+              id="dorrar"
+              type="text"
+              name="dorrar"
+              className="mt-1 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            ></input>
+          </>
+        )}
         <div className="mb-2 flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
           <dt className="space-y-6 text-sm font-medium">Pris</dt>
           <dd className="text-base">
