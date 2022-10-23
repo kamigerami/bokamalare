@@ -1,25 +1,47 @@
 import { Disclosure } from "@headlessui/react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import FormButton from "../FormButton";
+import {
+  arbetsobjektState,
+  bostadState,
+  kundgruppState,
+  prisState,
+  rumState,
+  stepState,
+} from "../Recoil/atoms";
 
-const subtotal = "$108.00";
-const taxes = "$9.92";
+const Offert = () => {
+  const setState = useSetRecoilState(stepState);
+  const step = useRecoilValue(stepState);
+  const kundgrupp = useRecoilValue(kundgruppState);
+  const arbetsobjekt = useRecoilValue(arbetsobjektState);
+  const rum = useRecoilValue(rumState);
+  const bostad = useRecoilValue(bostadState);
+  const pris = useRecoilValue(prisState);
 
-const total = "$141.92";
-const products = [
-  {
-    id: 1,
-    name: "Offert på målning",
-    href: "#",
-    price: "$36.00",
-    imageSrc:
-      "https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    imageAlt: "Färg, målarfärger, penslar och roller mot en vägg",
-  },
-];
+  const handlePrevious = () => {
+    setState((oldState) => oldState - 1);
+  };
 
-const OrderSummary = () => {
+  const exMoms = pris * 0.8;
+  const moms = pris * 0.2;
+
+  const total = pris;
+  const products = [
+    {
+      id: 1,
+      name: "Offert på målning",
+      href: "#",
+      price: pris,
+      imageSrc:
+        "https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      imageAlt: "Färg, målarfärger, penslar och roller mot en vägg",
+    },
+  ];
+
   return (
     <>
-      <main className="lg:flex lg:flex-row-reverse lg:overflow-hidden">
+      <main className="relative lg:flex lg:flex-row-reverse lg:overflow-hidden">
         <h1 className="sr-only">Checkout</h1>
 
         {/* Mobile order summary */}
@@ -101,25 +123,43 @@ const OrderSummary = () => {
 
                   <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
                     <div className="flex justify-between">
+                      <dt>Kundgrupp</dt>
+                      <dd>{kundgrupp}</dd>
+                    </div>
+                    {arbetsobjekt === "rum" && (
+                      <div className="flex justify-between">
+                        <dt className="capitalize">{arbetsobjekt}</dt>
+                        <dd>{rum.bredd + "*" + rum.hojd + "*" + rum.langd}</dd>
+                      </div>
+                    )}
+                    {arbetsobjekt === "bostad" && (
+                      <div className="flex justify-between">
+                        <dt className="capitalize">{arbetsobjekt}</dt>
+                        <dd>{bostad.kvm + " kvm"}</dd>
+                        <dd>{bostad.fonster + " fönster"}</dd>
+                        <dd>{bostad.dorrar > 1 ? `${bostad.dorrar} dörrar` : `${bostad.dorrar} dörr`}</dd>
+                      </div>
+                    )}
+                    <div className="flex justify-between">
                       <dt>Summa ex. moms</dt>
-                      <dd className="text-gray-900">{subtotal}</dd>
+                      <dd className="text-gray-900">{exMoms} Kr</dd>
                     </div>
 
                     <div className="flex justify-between">
                       <dt>Moms</dt>
-                      <dd className="text-gray-900">{taxes}</dd>
+                      <dd className="text-gray-900">{moms} Kr</dd>
                     </div>
 
-                    <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
-                      <dt>Summa ink. moms</dt>
-                      <dd className="text-base">{total}</dd>
-                    </div>
+                    {/* <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900"> */}
+                    {/* <dt>Summa ink. moms</dt> */}
+                    {/* <dd className="text-base">{total} Kr</dd> */}
+                    {/* </div> */}
                   </dl>
                 </Disclosure.Panel>
 
                 <p className="mt-6 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-gray-900">
                   <span className="text-base">Total</span>
-                  <span className="text-base">{total}</span>
+                  <span className="text-base">{total} Kr</span>
                 </p>
               </>
             )}
@@ -183,24 +223,35 @@ const OrderSummary = () => {
             <dl className="mt-10 space-y-6 text-sm font-medium text-gray-500">
               <div className="flex justify-between">
                 <dt>Summa ex. moms</dt>
-                <dd className="text-gray-900">{subtotal}</dd>
+                <dd className="text-gray-900">{exMoms} Kr</dd>
               </div>
 
               <div className="flex justify-between">
                 <dt>Moms</dt>
-                <dd className="text-gray-900">{taxes}</dd>
+                <dd className="text-gray-900">{moms} Kr</dd>
               </div>
 
-              <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
+              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-6 text-gray-900">
                 <dt>Summa ink. moms</dt>
                 <dd className="text-base">{total}</dd>
-              </div>
+              </div> */}
             </dl>
           </div>
+          <FormButton
+            type="button"
+            className="focus-outline-none bg-gray-400 outline-none ring-0 hover:bg-blue-400"
+            onClick={handlePrevious}
+          >
+            Tillbaka
+          </FormButton>
+
+          <FormButton type="submit" onClick={() => console.log("next")}>
+            Nästa
+          </FormButton>
         </section>
       </main>
     </>
   );
 };
 
-export default OrderSummary;
+export default Offert;
